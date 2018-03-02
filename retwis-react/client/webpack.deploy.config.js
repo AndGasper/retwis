@@ -1,24 +1,13 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
-
 module.exports = {
-    entry: [
-        'webpack-dev-server/client?http://localhost:3000',
-        './index.js'
-    ],
-    resolve: {
-        alias: {
-            actions: resolve(__dirname, './src/components/actions'),
-            components: resolve(__dirname, './src/components'),
-        }
-    },
+    entry: [ './index.js' ],
     output: {
         filename: 'bundle.js',
         path: resolve(__dirname, 'dist'),
         publicPath: '/'
     },
     context: resolve(__dirname, 'src'),
-    devtool: 'inline-source-map',
     module: {
         rules: [
             {
@@ -28,17 +17,22 @@ module.exports = {
             },
             {
                 test: /\.css$/,
+
                 loader: 'style-loader!css-loader'
             },
             {
                 test: /\.(gif|png|jpe?g|svg)$/i,
-                use: [ 'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
+                use: [ 'file-loader?hash=sha512&digest=hex&name=imgs/[hash].[ext]',
                     'image-webpack-loader?bypassOnDebug' ]
             }
         ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin()
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
+        }),
+        // new webpack.optimize.UglifyJsPlugin()
     ]
 };

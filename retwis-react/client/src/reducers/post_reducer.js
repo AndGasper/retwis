@@ -1,6 +1,6 @@
 import {
     CREATE_POST
-} from '/actions/types';
+} from 'actions/types';
 
 const default_state = {
     all: []

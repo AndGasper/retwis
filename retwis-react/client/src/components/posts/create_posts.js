@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Field, FieldArray, refuxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { createPost } from '/components/actions/index'; 
-import renderInput from '/components/utilities/render_input';
+import { createPost } from 'actions/index'; 
+// import renderInput from '/components/utilities/render_input';
 
 class CreatePost extends Component {
     render() {
