@@ -3,7 +3,7 @@ import React from 'react';
 const Simple = () => {
     return(
         <div>
-            Hello
+            Hello simple component
         </div>
     );
 }

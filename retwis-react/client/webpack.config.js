@@ -8,7 +8,7 @@ module.exports = {
     ],
     resolve: {
         alias: {
-            actions: resolve(__dirname, './src/components/actions'),
+            actions: resolve(__dirname, './src/actions'),
             components: resolve(__dirname, './src/components'),
         }
     },
