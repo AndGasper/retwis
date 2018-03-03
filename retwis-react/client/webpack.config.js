@@ -2,6 +2,7 @@ const { resolve } = require('path');
 const webpack = require('webpack');
 
 module.exports = {
+    mode:'development',
     entry: [
         'webpack-dev-server/client?http://localhost:3000',
         './index.js'
@@ -10,6 +11,7 @@ module.exports = {
         alias: {
             actions: resolve(__dirname, './src/actions'),
             components: resolve(__dirname, './src/components'),
+            reducers: resolve(__dirname, './src/reducers')
         }
     },
     output: {
@@ -39,6 +41,11 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin()
+        new webpack.NamedModulesPlugin(),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('development')
+            }
+        })
     ]
 };

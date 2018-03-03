@@ -3,7 +3,11 @@ import {
 } from 'actions/types';
 
 const default_state = {
-    all: []
+    all: [{
+        author: "Arthur",
+        post: "Having fun isn't hard when you've got a library card",
+        createdDate: "Now!"
+    }]
 };
 // All posts is probably something like:
 /**
