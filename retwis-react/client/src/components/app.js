@@ -1,70 +1,43 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React from 'react';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-const BasicExample = () => (
-  <Router>
-    <div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/about">About</Link>
-        </li>
-        <li>
-          <Link to="/topics">Topics</Link>
-        </li>
-      </ul>
+import {
+    purple700,
+    indigo200,
+    grey400,
+    white, darkBlack, fullBlack,
+} from 'material-ui/styles/colors';
+import {fade} from 'material-ui/utils/colorManipulator';
+import spacing from 'material-ui/styles/spacing';
 
-      <hr />
-
-      <Route exact path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/topics" component={Topics} />
-    </div>
-  </Router>
+// getMuiTheme() computes a "valid" muiTheme object
+const muiTheme = getMuiTheme({
+    spacing: spacing,
+    fontFamily: 'Roboto, sans-serif',
+    margin: "1em auto",
+    palette: {
+        primary1Color: purple700,
+        primary3Color: grey400,
+        accent1Color: indigo200,
+        textColor: fullBlack,
+        alternateTextColor: white,
+        canvasColor: "#fff",
+        borderColor: grey400,
+        disabledColor: fade(darkBlack, 0.3),
+        pickerHeaderColor: purple700,
+        clockCircleColor: fade(darkBlack, 0.07),
+        shadowColor: fullBlack,
+    }
+});
+const App = (props) => (
+    <MuiThemeProvider muiTheme={muiTheme}>
+        <div>
+        {props.children}
+        </div>
+    </MuiThemeProvider>
 );
 
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-);
-
-const About = () => (
-  <div>
-    <h2>About</h2>
-  </div>
-);
-
-const Topics = ({ match }) => (
-  <div>
-    <h2>Topics</h2>
-    <ul>
-      <li>
-        <Link to={`${match.url}/rendering`}>Rendering with React</Link>
-      </li>
-      <li>
-        <Link to={`${match.url}/components`}>Components</Link>
-      </li>
-      <li>
-        <Link to={`${match.url}/props-v-state`}>Props v. State</Link>
-      </li>
-    </ul>
-
-    <Route path={`${match.url}/:topicId`} component={Topic} />
-    <Route
-      exact
-      path={match.url}
-      render={() => <h3>Please select a topic.</h3>}
-    />
-  </div>
-);
-
-const Topic = ({ match }) => (
-  <div>
-    <h3>{match.params.topicId}</h3>
-  </div>
-);
-
-export default BasicExample;
+export default App;

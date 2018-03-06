@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { createPost } from 'actions/index'; 
-// import renderInput from '/components/utilities/render_input';
+import renderInput from 'components/utilities/render_input';
 
 class CreatePost extends Component {
     render() {
@@ -31,7 +31,7 @@ CreatePost = reduxForm({
 
 function mapStateToProps(state) {
     return {
-        post: state.posts.post
+        post: state.post.post
     }
 }
 

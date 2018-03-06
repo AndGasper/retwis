@@ -3,14 +3,16 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Simple from 'components/simple';
 import CreatePost from 'components/posts/create_posts';
-import { Provider, createStore } from 'redux';
-import {rootReducer as reducer }  from 'reducers/index';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import rootReducer  from 'reducers/index';
+import App from 'components/app';
 
-let stateStore = createStore(reducer);
+let stateStore = createStore(rootReducer);
 
 ReactDOM.render(
     <Provider store={stateStore}>
-        <Router>
+        <Router component={App}>
             <div>
             <Simple/>
             <Route path="/post" component={CreatePost} />
